@@ -1,1 +1,1 @@
-# simple ansible role for splunk on centos 6/7
+simple ansible role for splunk on centos 6/7
