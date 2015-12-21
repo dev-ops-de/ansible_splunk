@@ -1,0 +1,4 @@
+- hosts: production_monitoring
+  sudo: True
+  roles:
+    - splunk

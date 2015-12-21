@@ -1,0 +1,4 @@
+- hosts: production
+  sudo: True
+  roles:
+    - splunk-forwarder

@@ -1,0 +1,18 @@
+---
+- name: copy over the splunk installation rpm
+  copy: src={{ splunk_filename }} dest=/tmp
+
+- name: install splunk with dpkg
+  command: rpm -ivh /tmp/{{ splunk_filename }} creates=/opt/splunkforwarder
+
+- name: splunk license
+  command: /opt/splunkforwarder/bin/splunk start --accept-license creates=/opt/splunkforwarder/etc/users/splunk-system-user
+
+- name: setup to start at boot
+  command: /opt/splunkforwarder/bin/splunk enable boot-start
+
+- name: connect to splunk server
+  command: /opt/splunkforwarder/bin/splunk add forward-server {{ splunk_server }}:9997 -auth admin:changeme
+
+- name: add monitor for /var/log
+  command: /opt/splunkforwarder/bin/splunk add monitor /var/log
